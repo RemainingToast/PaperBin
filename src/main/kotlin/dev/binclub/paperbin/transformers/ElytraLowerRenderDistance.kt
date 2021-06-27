@@ -26,11 +26,11 @@ object ElytraLowerRenderDistance: PaperBinFeature {
     override fun registerTransformers() {
         if(!PaperBinConfig.elytraLowerRenderDistance) return
 
-        println("Max view distance in overworld is "+PaperBinConfig.elytraLowerRenderDistanceOverworld)
-        println("Max view distance in nether is "+PaperBinConfig.elytraLowerRenderDistanceNether)
-        println("Max view distance in end is "+PaperBinConfig.elytraLowerRenderDistanceEnd)
-        println("Max view distance while flying is "+PaperBinConfig.elytraLowerRenderDistanceFlying)
-        println("Flying speed threshold is "+PaperBinConfig.elytraLowerRenderDistanceFlyingThresold)
+//        println("Max view distance in overworld is "+PaperBinConfig.elytraLowerRenderDistanceOverworld)
+//        println("Max view distance in nether is "+PaperBinConfig.elytraLowerRenderDistanceNether)
+//        println("Max view distance in end is "+PaperBinConfig.elytraLowerRenderDistanceEnd)
+//        println("Max view distance while flying is "+PaperBinConfig.elytraLowerRenderDistanceFlying)
+//        println("Flying speed threshold is "+PaperBinConfig.elytraLowerRenderDistanceFlyingThresold)
 
         // register view distance listeners
         register("net.minecraft.server.v1_12_R1.PlayerChunkMap") { cn ->
@@ -84,7 +84,8 @@ object ElytraLowerRenderDistance: PaperBinFeature {
 
     @JvmStatic
     fun viewDistanceForWorld(player: EntityPlayer, defaultDistance: Int): Int =
-        if (isPlayerFlying(player)) PaperBinConfig.elytraLowerRenderDistanceFlying else when (player.getWorld().worldProvider.dimensionManager.dimensionID) {
+        if (isPlayerFlying(player)) PaperBinConfig.elytraLowerRenderDistanceFlying else
+            when (player.getWorld().worldProvider.dimensionManager.dimensionID) {
             0 -> PaperBinConfig.elytraLowerRenderDistanceOverworld
             -1 -> PaperBinConfig.elytraLowerRenderDistanceNether
             1 -> PaperBinConfig.elytraLowerRenderDistanceEnd

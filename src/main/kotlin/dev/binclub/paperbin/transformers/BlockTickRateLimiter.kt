@@ -14,43 +14,45 @@ import org.objectweb.asm.tree.*
 object BlockTickRateLimiter: PaperBinFeature {
 	@JvmStatic
 	fun shouldTickBlock(block: Any): Boolean {
-		block as Block
-		
 		if (!PaperBinConfig.blockRateLimit) return true
+
+		block as Block
+
+		val amount = PaperBinConfig.blockRateLimitAmount
 		
 		return when (block) {
 			block is BlockStationary -> {
 				// Stationary lava blocks will every tick try to ignite a nearby block
 				// Lets limit this by 30 ticks as this is very unessential
-				return PaperBinInfo.ticks % 30 == 0
+				return PaperBinInfo.ticks % amount == 0
 			}
 			block is BlockFlowing -> {
-				return PaperBinInfo.ticks % 30 == 0
+				return PaperBinInfo.ticks % amount == 0
 			}
 			block is BlockMagma -> {
 				// Magma blocks emit smoke push air above them
 				// Honestly why
 				// Lets reduce this by 1/30th
-				return PaperBinInfo.ticks % 30 == 0
+				return PaperBinInfo.ticks % amount == 0
 			}
 			block is BlockLeaves -> {
 				// Lower rate at which leaf decay calculation is performed
-				return PaperBinInfo.ticks % 30 == 0
+				return PaperBinInfo.ticks % amount == 0
 			}
 			block is BlockGrass -> {
 				// Lower rate at which grass spreads
-				return PaperBinInfo.ticks % 20 == 0
+				return PaperBinInfo.ticks % amount == 0
 			}
 			block is BlockLongGrass -> {
-				return PaperBinInfo.ticks % 10 == 0
+				return PaperBinInfo.ticks % amount == 0
 			}
 			block is BlockSoil -> {
 				// Soil blocks calculate their moisture or something continuously lmao
-				return PaperBinInfo.ticks % 5 == 0
+				return PaperBinInfo.ticks % amount == 0
 			}
 			block is BlockFire -> {
 				// Lower rate at which fire spreads
-				return PaperBinInfo.ticks % 15 == 0
+				return PaperBinInfo.ticks % amount == 0
 			}
 			else -> true
 		}

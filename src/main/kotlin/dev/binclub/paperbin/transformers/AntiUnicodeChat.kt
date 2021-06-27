@@ -17,7 +17,8 @@ import org.objectweb.asm.tree.VarInsnNode
 object AntiUnicodeChat: PaperBinFeature {
 	@JvmStatic
 	fun isAllowedCharacter(char: Char): Boolean {
-		return (char in ' '..'~')
+		val block = Character.UnicodeBlock.of(char)
+		return block == Character.UnicodeBlock.BASIC_LATIN
 	}
 	
 	override fun registerTransformers() {

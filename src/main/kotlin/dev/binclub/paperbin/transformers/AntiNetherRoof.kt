@@ -176,8 +176,6 @@ object AntiNetherRoof: PaperBinFeature {
 			if (!isValid(from)) {
 				/*
 					If they are teleporting from another invalid location this likely means they are stuck
-					Rather than just cancelling the teleport and preventing them from moving the most
-				 	humane thing to do is just to kill them :/
 				 */
 				player.damage(20000.0)
 			}

@@ -28,6 +28,7 @@ object PaperBinConfig {
 	var antiPortalGodmode: Boolean by BooleanProperty(properties, "antiPortalGodmode")
 	var antiUnicodeChat: Boolean by BooleanProperty(properties, "antiUnicodeChat", false)
 	var blockRateLimit: Boolean by BooleanProperty(properties, "blockRateLimit")
+	var blockRateLimitAmount: Int by IntProperty(properties, "blockRateLimit.amount", 30)
 	var chunkLoadOptimisations: Boolean by BooleanProperty(properties, "chunkLoadOptimisations", false)
 	var customServerBrand: String by StringProperty(properties, "customServerBrand", "PaperBin")
 	var fastGameRule: Boolean by BooleanProperty(properties, "fastGameRule")
